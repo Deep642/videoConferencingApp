@@ -3,8 +3,10 @@ const app = express();
 const server = require("http").createServer(app);
 const { v4: uuidv4 } = require("uuid");
 const cors =  require("cors");
+const path=require("path");
 app.use(cors());
 app.set("view engine", "ejs");
+app.set("views",path.resolve("./views"));
 const io = require("socket.io")(server, {
   cors: {
     origin: '*' 
@@ -22,8 +24,8 @@ app.get("/", (req, res) => {
   res.redirect(`/${uuidv4()}`);
 });
 
-app.get("/room", (req, res) => {
-  res.render("room", { roomId: req.params.room });
+app.get("/:room", (req, res) => {
+  res.render(`room`, { roomId: req.params.room });
 });
 
 io.on("connection", (socket) => {
