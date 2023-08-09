@@ -6,7 +6,7 @@ const cors =  require("cors");
 const path=require("path");
 app.use(cors());
 app.set("view engine", "ejs");
-app.set("views",path.resolve("./views"));
+// app.set("views",path.resolve("./views"));
 const io = require("socket.io")(server, {
   cors: {
     origin: '*' 
